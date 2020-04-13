@@ -13,15 +13,16 @@
 
 # Definition de la fonction
 function Stagiaire {
-# Test sur l'age de la personne
-switch ($personneAge) {
-    {$_ -le 25} {Write-Host 'en pleine jeunesse'; break }
-    {$_ -le 35} {Write-Host 'en pleine force vive'; break }
-    {$_ -le 45} {Write-Host 'en pleine maturité'; break }
-    Default {Write-Host 'en pleine serénité'}
-}
+
+[CmdletBinding()]
+param (
+   [String]$personneNom,
+   [Int]$personneAge
+)
+BEGIN {Write-Verbose "Début du script"}
+PROCESS { "Bonjour {0} ! Tu as {1} ans." -F $personneNom, $personneAge }
+END {Write-Verbose "Fin du script"}
 }
 
 # Appel de la fonction
-Stagiaire
-
+Stagiaire "Pascal Siakam" 26  -verbose
